@@ -1,0 +1,66 @@
+from preconditions import *
+from jsondiff import diff
+
+#diff(json1, json2)
+
+json1 = "{'some json' = '2', 'some json        2' = '2'}"
+json2 = "{'some json               ' = '2', 'some json2' = '2'}"
+
+print(diff(json1.replace(' ', ''), json2.replace(' ', '')))
+#{
+#    "_id":"raspberrypi",
+#
+#    "_correlationId":  "7e8ede84-2f05-4bf7-919c-02b403517035",
+#                       "cbcb3123-6038-4821-9117-4f764cd18da5"
+#
+#    "_userId":         "f1f4fcf5-fc9e-458a-b72f-b09c6e0e3ee0",
+#                       "f1f4fcf5-fc9e-458a-b72f-b09c6e0e3ee0"
+#
+#    "_commandType":"PermitJoinEnableCommand",
+#    "_version":1
+#}
+
+expected_event = json.dumps({
+            "_eventType": "PermitJoinEnabled",
+            "_correlationId": "sdsd",
+            "_userId": "sdsd",
+            "_id": "sdsd",
+            "timeout": 60
+        })
+print("expected_event: " + expected_event)
+#def test_permit_join_enable(create_user, send_command, receive_event, correlation_id):
+#    command = {
+#        "_commandType": "PermitJoinEnableCommand",
+#        "_correlationId": correlation_id,
+#        "_userId": create_user['user_id'],
+#        "_id": "omo-test-auto"
+#    }
+#    await send_command(command)
+#
+#    event = await receive_event(command)
+#    expected_event = {
+#        "_eventType": "PermitJoinEnabled",
+#        "_correlationId": command['_correlationId'],
+#        "_userId": command['_userId'],
+#        "_id": command['_id']
+#    }
+#    assert event == expected_event
+
+
+#def test_permit_join_disable(create_user, send_command, receive_event, correlation_id):
+#    command = {
+#        "_commandType": "PermitJoinDisableCommand",
+#        "_correlationId": correlation_id,
+#        "_userId": create_user['user_id'],
+#        "_id": "omo-test-auto"
+#    }
+#    await send_command(command)
+#
+#    event = await receive_event(command)
+#    expected_event = {
+#        "_eventType": "PermitJoinDisabled",
+#        "_correlationId": command['_correlationId'],
+#        "_userId": command['_userId'],
+#        "_id": command['_id']
+#    }
+#    assert event == expected_event
